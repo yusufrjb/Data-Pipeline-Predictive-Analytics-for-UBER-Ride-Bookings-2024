@@ -156,6 +156,7 @@ def show_segmentasi():
                 use_container_width=True,
                 hide_index=True
             )
+
             
             # Key insights from summary
             st.markdown("#### 💡 Insights Utama")
