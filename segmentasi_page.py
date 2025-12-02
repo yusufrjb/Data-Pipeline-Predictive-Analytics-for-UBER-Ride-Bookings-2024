@@ -141,10 +141,20 @@ def show_segmentasi():
             
             # Display styled dataframe with all columns
             st.dataframe(
-                display_summary,
+                display_summary.style.format({
+                    'Avg Booking ': '{:,.2f}',
+                    'Avg Distance (km)': '{:.2f}',
+                    'Driver Rating': '{:.2f}',
+                    'Customer Rating': '{:.2f}',
+                    'Cancelled by Customer': '{:.2f}',
+                    'Cancelled by Driver': '{:.2f}',
+                    'Avg Incomplete Rides': '{:.2f}'
+                }).background_gradient(
+                    subset=['Total Trips'] if 'Total Trips' in display_summary.columns else [],
+                    cmap='Blues'
+                ),
                 use_container_width=True,
                 hide_index=True
-
             )
             
             # Key insights from summary
