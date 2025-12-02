@@ -5,7 +5,7 @@ from utils import create_metric_card, create_info_box, create_section_divider
 
 def show_global_demand():
     # Header
-    st.markdown('<h1 class="main-header">🌍 Permintaan Global</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">🌍 Permintaan Global</h1>')
     st.markdown(
         '<p class="subtitle">Analisis dan prediksi permintaan secara keseluruhan menggunakan model forecasting</p>',
         unsafe_allow_html=True
@@ -139,4 +139,5 @@ def show_global_demand():
         - Perencanaan resource harian/mingguan
         - Antisipasi peak demand
         """)
+
 
