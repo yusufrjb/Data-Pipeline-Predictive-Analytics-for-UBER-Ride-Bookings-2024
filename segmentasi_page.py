@@ -23,7 +23,7 @@ def show_segmentasi():
     )
     
     # Load segmented data
-    seg_path = "outputs_customer_segmentation_k_2/segmented_customers.csv"
+    seg_path = "outputs_cuomer_segmentation_k_2/segmented_cuomers.csv"
     
     if os.path.exists(seg_path):
         df_seg = pd.read_csv(seg_path)
@@ -140,7 +140,8 @@ def show_segmentasi():
                     display_summary.rename(columns={old_col: new_col}, inplace=True)
             
             # Display styled dataframe with all columns
-            st.dataframe(
+            # Display styled dataframe with all columns
+            styled_summary = (
                 display_summary.style.format({
                     'Avg Booking ': '{:,.2f}',
                     'Avg Distance (km)': '{:.2f}',
@@ -152,13 +153,10 @@ def show_segmentasi():
                 }).background_gradient(
                     subset=['Total Trips'] if 'Total Trips' in display_summary.columns else [],
                     cmap='Blues'
-                ),
-                use_container_width=True,
-                hide_index=True
+                )
             )
             
-            # Key insights from summary
-            st.markdown("#### 💡 Insights Utama")
+            st.write(styled_summary)
             
             col1, col2, col3 = st.columns(3)
             
