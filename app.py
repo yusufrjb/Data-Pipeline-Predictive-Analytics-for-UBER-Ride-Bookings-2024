@@ -2,81 +2,94 @@ import streamlit as st
 from segmentasi_page import show_segmentasi
 from global_demand_page import show_global_demand
 from vehicle_demand_page import show_vehicle_demand
-from cluster_demand_page import show_cluster_demand
-from evaluasi_segment_page import show_evaluasi_segment
 from utils import get_theme_tokens, inject_css
 
 # ========================================
-# Fungsi untuk inisialisasi session state
+# Page Configuration
+# ========================================
+st.set_page_config(
+    page_title="Dashboard Analisis Permintaan",
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# ========================================
+# Initialize Session State
 # ========================================
 def init_state():
     if "theme" not in st.session_state:
-        st.session_state.theme = "Light"  # Default to Light theme
+        st.session_state.theme = "Light"
     if "page" not in st.session_state:
-        st.session_state.page = "Segmentasi Pelanggan"  # Default page
+        st.session_state.page = "Segmentasi Pelanggan"
 
-# ========================================
-# Inisialisasi session state dan tema
-# ========================================
 init_state()
 
-# Dapatkan tema yang sesuai
+# Get theme tokens and inject CSS
 t = get_theme_tokens(st.session_state.theme)
-
-# Inject CSS untuk styling
 inject_css(t)
 
 # ========================================
-# Sidebar untuk memilih tema dan halaman
+# Sidebar Navigation
 # ========================================
 with st.sidebar:
-    st.markdown('<div class="sidebar-title">🔧 Dashboard Analisis Permintaan</div>', unsafe_allow_html=True)
-
-    # Pilihan Tema
+    st.markdown('<div class="sidebar-title">📊 Dashboard Analisis</div>', unsafe_allow_html=True)
+    
+    st.markdown("---")
+    
+    # Theme Selector
+    st.markdown('<div class="sidebar-section">🎨 Tema</div>', unsafe_allow_html=True)
     theme_choice = st.radio(
         "Pilih Tema",
         ["🌤️ Terang", "🌙 Gelap"],
         index=0 if st.session_state.theme == "Light" else 1,
         label_visibility="collapsed"
     )
-
-    # Sesuaikan tema yang dipilih
+    
     if "🌤️ Terang" in theme_choice:
         st.session_state.theme = "Light"
     else:
         st.session_state.theme = "Dark"
-
-    # Navigasi Halaman
+    
     st.markdown("---")
-    st.markdown('<div class="sidebar-section">Navigasi</div>', unsafe_allow_html=True)
-    page_choice = st.radio("Pilih Halaman", ["Segmentasi Pelanggan", "Permintaan Global", "Permintaan Kendaraan", "Permintaan Berdasarkan Cluster", "Evaluasi Segmentasi"])
+    
+    # Page Navigation
+    st.markdown('<div class="sidebar-section">🧭 Navigasi</div>', unsafe_allow_html=True)
+    
+    pages = {
+        "📈 Segmentasi Pelanggan": "Segmentasi Pelanggan",
+        "🌍 Permintaan Global": "Permintaan Global",
+        "🚗 Permintaan Kendaraan": "Permintaan Kendaraan"
+    }
+    
+    page_choice = st.radio(
+        "Pilih Halaman",
+        list(pages.keys()),
+        label_visibility="collapsed"
+    )
+    
+    st.session_state.page = pages[page_choice]
+    
+    st.markdown("---")
+    
+    # Footer Info
+    st.markdown("""
+    <div style="text-align: center; padding: 20px 0; color: #B3B3B3; font-size: 12px;">
+        <p>Dashboard Analisis Permintaan</p>
+        <p>v1.0.0 | 2025</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Menetapkan halaman yang dipilih
-    if page_choice == "Segmentasi Pelanggan":
-        st.session_state.page = "Segmentasi Pelanggan"
-    elif page_choice == "Permintaan Global":
-        st.session_state.page = "Permintaan Global"
-    elif page_choice == "Permintaan Kendaraan":
-        st.session_state.page = "Permintaan Kendaraan"
-    elif page_choice == "Permintaan Berdasarkan Cluster":
-        st.session_state.page = "Permintaan Berdasarkan Cluster"
-    elif page_choice == "Evaluasi Segmentasi":
-        st.session_state.page = "Evaluasi Segmentasi"
-
-# Update tema setelah navigasi
+# Update theme after navigation
 t = get_theme_tokens(st.session_state.theme)
 inject_css(t)
 
 # ========================================
-# Konten untuk setiap halaman
+# Main Content Routing
 # ========================================
 if st.session_state.page == "Segmentasi Pelanggan":
-    show_segmentasi()  # Halaman untuk segmentasi
+    show_segmentasi()
 elif st.session_state.page == "Permintaan Global":
-    show_global_demand()  # Halaman untuk permintaan global
+    show_global_demand()
 elif st.session_state.page == "Permintaan Kendaraan":
-    show_vehicle_demand()  # Halaman untuk permintaan kendaraan
-elif st.session_state.page == "Permintaan Berdasarkan Cluster":
-    show_cluster_demand()  # Halaman untuk permintaan berdasarkan cluster
-elif st.session_state.page == "Evaluasi Segmentasi":
-    show_evaluasi_segment()  # Halaman untuk evaluasi segmentasi
+    show_vehicle_demand()
