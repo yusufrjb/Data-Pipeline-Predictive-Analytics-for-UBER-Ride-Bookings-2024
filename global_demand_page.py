@@ -92,7 +92,7 @@ def show_global_demand():
         baseline_plot = "output_global_demand_v2/global_forecast_plot_prophet_log1p.png"
         if os.path.exists(baseline_plot):
             st.markdown('<div class="image-container">', unsafe_allow_html=True)
-            st.image(baseline_plot, use_container_width=True)
+            st.image(baseline_plot)
             st.markdown('</div>', unsafe_allow_html=True)
             st.caption("Model Baseline menggunakan pendekatan naive - memprediksi nilai terakhir dari data training")
         else:
@@ -106,7 +106,7 @@ def show_global_demand():
         forecast_data = "output_global_demand/global_forecast_prophet_test.csv"
         if os.path.exists(forecast_data):
             df_forecast = pd.read_csv(forecast_data)
-            st.dataframe(df_forecast.tail(20), use_container_width=True)
+            st.dataframe(df_forecast.tail(20))
             
             # Download button
             csv = df_forecast.to_csv(index=False).encode('utf-8')
@@ -139,3 +139,4 @@ def show_global_demand():
         - Perencanaan resource harian/mingguan
         - Antisipasi peak demand
         """)
+
