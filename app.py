@@ -37,21 +37,7 @@ with st.sidebar:
     
     st.markdown("---")
     
-    # Theme Selector
-    st.markdown('<div class="sidebar-section">🎨 Tema</div>', unsafe_allow_html=True)
-    theme_choice = st.radio(
-        "Pilih Tema",
-        ["🌤️ Terang", "🌙 Gelap"],
-        index=0 if st.session_state.theme == "Light" else 1,
-        label_visibility="collapsed"
-    )
-    
-    if "🌤️ Terang" in theme_choice:
-        st.session_state.theme = "Light"
-    else:
-        st.session_state.theme = "Dark"
-    
-    st.markdown("---")
+
     
     # Page Navigation
     st.markdown('<div class="sidebar-section">🧭 Navigasi</div>', unsafe_allow_html=True)
