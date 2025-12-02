@@ -172,7 +172,7 @@ def show_vehicle_demand():
             baseline_plot = f"output_vehicle_demand_v2/vehicle_{vehicle}_forecast_plot_prophet.png"
             if os.path.exists(baseline_plot):
                 st.markdown('<div class="image-container">', unsafe_allow_html=True)
-                st.image(baseline_plot, use_container_width=True)
+                st.image(baseline_plot)
                 st.markdown('</div>', unsafe_allow_html=True)
                 st.caption(f"Forecast baseline untuk {selected_vehicle.upper()}")
             else:
