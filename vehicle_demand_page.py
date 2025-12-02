@@ -200,8 +200,7 @@ def show_vehicle_demand():
                     'RMSE': '{:.2f}',
                     'MAPE (%)': '{:.2f}'
                 }).background_gradient(subset=['MAE'], cmap='RdYlGn_r'),
-                use_container_width=True,
-                hide_index=True
+                use_container_width=True
             )
         
         # Data preview
