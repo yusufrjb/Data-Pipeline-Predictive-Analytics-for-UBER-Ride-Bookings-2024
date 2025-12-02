@@ -140,20 +140,21 @@ def show_segmentasi():
                     display_summary.rename(columns={old_col: new_col}, inplace=True)
             
             # Display styled dataframe with all columns
-            formatted_summary = display_summary.copy()
-            
-            num_cols = [
-                'Avg Booking ', 'Avg Distance (km)', 'Driver Rating', 'Customer Rating',
-                'Cancelled by Customer', 'Cancelled by Driver', 'Avg Incomplete Rides'
-            ]
-            
-            for c in num_cols:
-                if c in formatted_summary.columns:
-                    formatted_summary[c] = formatted_summary[c].astype(float).round(2)
-            
-            st.dataframe(formatted_summary, use_container_width=True, hide_index=True)
-
-
+            st.dataframe(
+                display_summary.style.format({
+                    'Avg Booking ': '{:,.2f}',
+                    'Avg Distance (km)': '{:.2f}',
+                    'Driver Rating': '{:.2f}',
+                    'Customer Rating': '{:.2f}',
+                    'Cancelled by Customer': '{:.2f}',
+                    'Cancelled by Driver': '{:.2f}',
+                    'Avg Incomplete Rides': '{:.2f}'
+                }).background_gradient(
+                    subset=['Total Trips'] if 'Total Trips' in display_summary.columns else [],
+                    cmap='Blues'
+                ),
+                use_container_width=True
+            )
             
             # Key insights from summary
             st.markdown("#### 💡 Insights Utama")
@@ -357,4 +358,3 @@ def show_segmentasi():
             ),
             unsafe_allow_html=True
         )
-        
