@@ -4,12 +4,29 @@ import os
 from utils import create_metric_card, create_info_box, create_section_divider
 
 def show_global_demand():
-    # Header
+    # Tanamkan CSS di awal file atau fungsi Anda
+    st.markdown("""
+        <style>
+        .main-header {
+            font-size: 3em; /* Contoh style */
+            color: #FF4B4B; /* Warna merah khas Streamlit */
+            text-align: center;
+        }
+        .subtitle {
+            font-size: 1.5em;
+            color: gray;
+            text-align: center;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+    
+    # Header menggunakan kelas yang sudah didefinisikan di atas
     st.markdown('<h1 class="main-header">🌍 Permintaan Global</h1>', unsafe_allow_html=True)
     st.markdown(
         '<p class="subtitle">Analisis dan prediksi permintaan secara keseluruhan menggunakan model forecasting</p>',
         unsafe_allow_html=True
     )
+
     
     # Info Box
     st.markdown(
@@ -139,6 +156,7 @@ def show_global_demand():
         - Perencanaan resource harian/mingguan
         - Antisipasi peak demand
         """)
+
 
 
 
